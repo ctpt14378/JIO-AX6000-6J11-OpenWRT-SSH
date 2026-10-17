@@ -91,27 +91,28 @@ make -j$(nproc) V=s
 After a successful build, the firmware images are in:
 
 ```
-bin/targets/qualcommax/ipq50xx/
+bin/targets/qualcommbe/ipq95xx/
 ```
 
-Key files:
+Key output files:
 
 | File | Purpose |
 | :--- | :--- |
-| `*-initramfs-fit-uImage.itb` | Initramfs image (used to create `6x11factory.ubi`) |
-| `*-squashfs-sysupgrade.bin` | Permanent sysupgrade image (`6x11sys.bin`) |
+| `openwrt-qualcommbe-ipq95xx-jiorouter_ax6000-jidu6j11-initramfs-uImage.itb` | Raw initramfs FIT image (kernel + embedded RAM rootfs) |
+| `openwrt-qualcommbe-ipq95xx-jiorouter_ax6000-jidu6j11-squashfs-factory.ubi` | Factory UBI image (used in Step 1 for temporary boot) |
+| `openwrt-qualcommbe-ipq95xx-jiorouter_ax6000-jidu6j11-squashfs-sysupgrade.bin` | Permanent sysupgrade image (used in Step 2) |
 
 ---
 
-## Step 6: Create the Factory UBI Image
+## Step 6: Create the Factory UBI Image (If not built automatically)
 
-The initramfs `.itb` file needs to be wrapped into a UBI image for flashing to the NAND slot.
+If your build target didn't generate `*-squashfs-factory.ubi` directly from image generation rules, wrap the initramfs `.itb` into UBI using `ubinize`:
 
 ### Create `ubinize.cfg`:
 ```ini
 [kernel]
 mode=ubi
-image=openwrt-qualcommax-ipq50xx-jiorouter_ax6000-jidu6j11-initramfs-fit-uImage.itb
+image=openwrt-qualcommbe-ipq95xx-jiorouter_ax6000-jidu6j11-initramfs-uImage.itb
 vol_id=0
 vol_name=kernel
 vol_type=dynamic
@@ -121,7 +122,7 @@ vol_flags=autoresize
 
 ### Run ubinize:
 ```bash
-ubinize -o 6x11factory.ubi -m 2048 -p 128KiB -s 2048 ubinize.cfg
+ubinize -o openwrt-qualcommbe-ipq95xx-jiorouter_ax6000-jidu6j11-squashfs-factory.ubi -m 2048 -p 128KiB -s 2048 ubinize.cfg
 ```
 
 Parameters:
@@ -133,8 +134,5 @@ Parameters:
 
 ## Step 7: Flash
 
-Use the generated files with the [main flashing guide](../README.md):
+Copy the generated `*factory.ubi` and `*sysupgrade.bin` files directly into your flasher folder alongside `6x11_ssh_flash.bat` and `flash.sh`, then follow the instructions in the [main README](../README.md).
 
-1. Rename the initramfs UBI → `6x11factory.ubi`
-2. Rename the sysupgrade → `6x11sys.bin`
-3. Follow Method 1 or Method 2 in the README

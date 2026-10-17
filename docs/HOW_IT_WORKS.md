@@ -119,15 +119,15 @@ After entering all three, the router has:
 
 ### How the Factory Image is Built
 
-The `6x11factory.ubi` file is a UBI image containing a single volume named `kernel`. It holds an OpenWrt initramfs FIT image (kernel + embedded rootfs in RAM).
+The factory UBI image (`openwrt-qualcommbe-ipq95xx-jiorouter_ax6000-jidu6j11-squashfs-factory.ubi`) contains a single UBI volume named `kernel`. It holds an OpenWrt initramfs FIT image (`openwrt-...-initramfs-uImage.itb` containing the kernel + embedded rootfs in RAM).
 
-It is generated from the OpenWrt initramfs `.itb` file using `ubinize`:
+It is generated using `ubinize`:
 
 ```ini
 # ubinize.cfg
 [kernel]
 mode=ubi
-image=6x11init.itb
+image=openwrt-qualcommbe-ipq95xx-jiorouter_ax6000-jidu6j11-initramfs-uImage.itb
 vol_id=0
 vol_name=kernel
 vol_type=dynamic
@@ -136,7 +136,7 @@ vol_flags=autoresize
 ```
 
 ```bash
-ubinize -o 6x11factory.ubi -m 2048 -p 128KiB -s 2048 ubinize.cfg
+ubinize -o openwrt-qualcommbe-ipq95xx-jiorouter_ax6000-jidu6j11-squashfs-factory.ubi -m 2048 -p 128KiB -s 2048 ubinize.cfg
 ```
 
 Parameters match the NAND geometry:

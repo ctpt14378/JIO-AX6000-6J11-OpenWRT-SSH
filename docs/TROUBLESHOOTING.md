@@ -50,20 +50,19 @@ Dd3$(dropbear${IFS}-B)
 
 ---
 
-## Flash Script Issues
+### `[-] Error: factory.ubi not found in /tmp!`
 
-### `[-] Error: /tmp/6x11factory.ubi not found!`
-
-**Cause:** The factory image wasn't uploaded to the router, or it was uploaded to the wrong path.
+**Cause:** The factory UBI image wasn't uploaded to the router, or it was uploaded to the wrong path.
 
 **Fix:** Ensure the SCP command completed successfully:
 ```bash
-scp -O 6x11factory.ubi root@192.168.31.1:/tmp/
+# Upload whichever variant you downloaded (Standard or Smallbuffers)
+scp -O openwrt-qualcommbe-*-factory.ubi root@192.168.31.1:/tmp/
 ```
 
 Check that the file exists on the router:
 ```bash
-ssh root@192.168.31.1 "ls -la /tmp/6x11factory.ubi"
+ssh root@192.168.31.1 "ls -la /tmp/*factory.ubi"
 ```
 
 ---
@@ -91,7 +90,7 @@ The automated `.bat` flasher does this automatically.
 ubidetach -m <MTD_NUMBER>
 
 # Then retry
-ubiformat /dev/mtd<NUMBER> -y -f /tmp/6x11factory.ubi
+ubiformat /dev/mtd<NUMBER> -y -f /tmp/*factory.ubi
 ```
 
 ---
