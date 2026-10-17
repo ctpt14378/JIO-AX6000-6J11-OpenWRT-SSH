@@ -31,6 +31,7 @@
 - [What You Get](#what-you-get)
 - [Prerequisites](#prerequisites)
 - [Step 1: Enable SSH on Stock Firmware](#step-1-enable-ssh-on-stock-firmware)
+- [Step 1.4: ⚠️ CRITICAL: Backup Stock Partitions (Do Not Skip!)](#14-️-critical-backup-stock-partitions-do-not-skip)
 - [Method 1: One-Click Flasher (Beginners)](#method-1-one-click-flasher-beginners)
 - [Method 2: Manual Flash (Advanced Users)](#method-2-manual-flash-advanced-users)
 - [Post-Install](#post-install)
@@ -190,7 +191,51 @@ BusyBox v1.36.1 () built-in shell (ash)
 root@OpenWrt:~#
 ```
 
-Type `exit` to disconnect. You are ready to flash!
+Type `exit` to disconnect.
+
+---
+
+### 1.4 ⚠️ CRITICAL: Backup Stock Partitions (Do NOT Skip!)
+
+> [!WARNING]
+> **DO NOT SKIP THIS STEP!**
+> Once you perform the final `sysupgrade`, the stock Jio firmware, partition tables, and calibration data on the NAND flash are **permanently overwritten**.
+> 
+> Your router contains unique, factory-calibrated radio data (`0:ART`), unique MAC addresses, and stock bootloaders (`0:APPSBL`, `0:MIBIB`). If you ever need to revive a bricked device via UART/hardware programmer in the future, **this backup will be your only lifeline.**
+
+#### Backup Steps:
+
+1. **SSH into the stock router:**
+   ```bash
+   ssh root@192.168.31.1
+   ```
+
+2. **Dump all partitions on the router:**
+   Run the following block directly in the router shell. It backs up your partition table and all critical boot, configuration, and calibration partitions into `/tmp/backup/`:
+   ```bash
+   mkdir -p /tmp/backup
+   cat /proc/mtd > /tmp/backup/mtd_table.txt
+
+   # Dump each partition safely
+   for dev in $(grep mtd /proc/mtd | cut -d: -f1); do
+       name=$(grep "^$dev:" /proc/mtd | awk -F'"' '{print $2}' | tr -d ' ')
+       echo "[*] Dumping $dev ($name)..."
+       cat /dev/${dev}ro > "/tmp/backup/${dev}_${name}.bin" 2>/dev/null || cat /dev/$dev > "/tmp/backup/${dev}_${name}.bin"
+   done
+
+   # Package into a single archive
+   tar -czf /tmp/jio_6J11_stock_backup.tar.gz -C /tmp/backup .
+   echo "[+] Done! Backup created at /tmp/jio_6J11_stock_backup.tar.gz"
+   exit
+   ```
+
+3. **Download the backup to your PC:**
+   From your PC's Command Prompt or PowerShell:
+   ```bash
+   scp -O root@192.168.31.1:/tmp/jio_6J11_stock_backup.tar.gz .
+   ```
+
+4. **Keep this file safe!** Save `jio_6J11_stock_backup.tar.gz` to a USB drive or cloud storage (Google Drive, OneDrive). You now have a complete snapshot of your router's stock state!
 
 ---
 
