@@ -1,14 +1,14 @@
 @echo off
 setlocal enabledelayedexpansion
-title Jio Qualcomm 6x11 OpenWrt Auto-Flasher
+title Jio AX6000 (6J11) OpenWrt Auto-Flasher
 color
 
 echo =======================================================
-echo     Jio Qualcomm 6x11 - 1-Click OpenWrt Flasher
+echo     Jio AX6000 (6J11) - 1-Click OpenWrt Flasher
 echo =======================================================
 echo.
 
-:: Detect factory image (Standard or SmallBuffers or 6x11factory.ubi)
+:: Detect factory image (Standard or SmallBuffers)
 set "FACTORY="
 if exist "*factory.ubi" (
     for %%f in (*factory.ubi) do (
@@ -16,7 +16,7 @@ if exist "*factory.ubi" (
     )
 )
 
-:: Detect sysupgrade image (Standard or SmallBuffers or 6x11sys.bin)
+:: Detect sysupgrade image (Standard or SmallBuffers)
 set "SYSUPGRADE="
 if exist "*sysupgrade.bin" (
     for %%f in (*sysupgrade.bin) do (

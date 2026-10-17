@@ -134,5 +134,5 @@ Parameters:
 
 ## Step 7: Flash
 
-Copy the generated `*factory.ubi` and `*sysupgrade.bin` files directly into your flasher folder alongside `6x11_ssh_flash.bat` and `flash.sh`, then follow the instructions in the [main README](../README.md).
+Copy the generated `*factory.ubi` and `*sysupgrade.bin` files directly into your flasher folder alongside `Jio_6J11_OpenWrt_Flasher.bat` and `flash.sh`, then follow the instructions in the [main README](../README.md).
 

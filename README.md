@@ -119,7 +119,7 @@ After a successful install:
    - **One** factory image (`*factory.ubi` — Standard or Smallbuffers)
    - **One** matching sysupgrade image (`*sysupgrade.bin` — Standard or Smallbuffers)
    - `flash.sh`
-   - `6x11_ssh_flash.bat`
+   - `Jio_6J11_OpenWrt_Flasher.bat`
 
 ---
 
@@ -207,9 +207,9 @@ Type `exit` to disconnect. You are ready to flash!
    ├── openwrt-qualcommbe-...-factory.ubi      (or smallbuffers variant)
    ├── openwrt-qualcommbe-...-sysupgrade.bin   (or smallbuffers variant)
    ├── flash.sh
-   └── 6x11_ssh_flash.bat
+   └── Jio_6J11_OpenWrt_Flasher.bat
    ```
-3. **Double-click `6x11_ssh_flash.bat`**.
+3. **Double-click `Jio_6J11_OpenWrt_Flasher.bat`**.
 4. The script will automatically:
    - ✅ Detect your factory and sysupgrade image filenames
    - ✅ Ping and connect to the stock router at `192.168.31.1`
