@@ -1,0 +1,2 @@
+# Firmware binaries are distributed via GitHub Releases.
+# Download 6x11factory.ubi and 6x11sys.bin from the Releases tab and place them in the root directory alongside 6x11_ssh_flash.bat.
