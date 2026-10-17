@@ -39,7 +39,7 @@
 - [FAQ](#faq)
 - [Troubleshooting](#troubleshooting)
 - [Building From Source](#building-from-source)
-- [Credits](#credits)
+- [Credits & Acknowledgments](#credits--acknowledgments)
 - [License](#license)
 
 ---

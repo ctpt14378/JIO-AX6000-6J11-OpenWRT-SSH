@@ -260,7 +260,7 @@ After sysupgrade:
 3. There is **no recovery partition** or stock firmware backup on the device
 4. Jio does not provide stock firmware images for manual re-flashing
 
-The only way to recover stock (or unbrick via hardware/UART) is by writing back the MTD dump taken during [Step 1.4: Backup Stock Partitions](../README.md#14-️-critical-backup-stock-partitions-do-not-skip).
+The only way to recover stock (or unbrick via hardware/UART) is by using the credentials and partition data saved during [Step 1.4: Backup MFG Partition](../README.md#14-️-recommended-backup-mfg-partition--retrieve-u-boot-creds).
 
 ---
 
