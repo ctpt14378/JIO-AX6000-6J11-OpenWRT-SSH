@@ -346,10 +346,11 @@ See **[docs/BUILDING_FIRMWARE.md](docs/BUILDING_FIRMWARE.md)** for compiling fro
 
 ---
 
-## Credits
+## Credits & Acknowledgments
 
-- OpenWrt Project — [openwrt.org](https://openwrt.org/)
-- Qualcomm IPQ50xx/IPQ95xx OpenWrt contributors
+- **[@Sandiep](https://github.com/Sandiep)** — **Special thanks and deep gratitude** to Sandiep for crafting and maintaining the custom OpenWrt builds for this hardware, providing invaluable technical guidance, device-tree insights, and continuous support throughout the research and testing of the Jio AX6000 (JIDU6J11). This project wouldn't have been possible without his dedication and expertise!
+- **OpenWrt Project** — [openwrt.org](https://openwrt.org/) for the incredible open-source embedded router operating system.
+- **Qualcomm IPQ50xx / IPQ95xx Linux Kernel & OpenWrt Contributors** for upstream hardware support.
 
 ---
 
